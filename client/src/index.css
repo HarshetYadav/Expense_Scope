@@ -1,0 +1,573 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+}
+
+@layer components {
+  /* ERP Professional Components */
+  .erp-card {
+    @apply bg-white rounded-lg shadow-erp border border-neutral-200 hover:shadow-erp-lg transition-all duration-500 ease-in-out;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    transform: translateY(0);
+  }
+  
+  .erp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .erp-card-header {
+    @apply px-6 py-4 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-primary-100;
+  }
+  
+  .erp-card-body {
+    @apply px-6 py-4;
+  }
+  
+  .erp-card-footer {
+    @apply px-6 py-4 border-t border-neutral-200 bg-neutral-50;
+  }
+  
+  /* ERP Buttons */
+  .erp-btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .erp-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .erp-btn-primary {
+    @apply erp-btn bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 focus:ring-primary-500 shadow-sm hover:shadow-md;
+  }
+  
+  .erp-btn-secondary {
+    @apply erp-btn bg-white text-neutral-700 border border-neutral-300 hover:bg-neutral-50 hover:border-neutral-400 focus:ring-neutral-500;
+  }
+  
+  .erp-btn-success {
+    @apply erp-btn bg-gradient-to-r from-success-600 to-success-700 text-white hover:from-success-700 hover:to-success-800 focus:ring-success-500 shadow-sm hover:shadow-md;
+  }
+  
+  .erp-btn-warning {
+    @apply erp-btn bg-gradient-to-r from-warning-500 to-warning-600 text-white hover:from-warning-600 hover:to-warning-700 focus:ring-warning-500 shadow-sm hover:shadow-md;
+  }
+  
+  .erp-btn-danger {
+    @apply erp-btn bg-gradient-to-r from-danger-600 to-danger-700 text-white hover:from-danger-700 hover:to-danger-800 focus:ring-danger-500 shadow-sm hover:shadow-md;
+  }
+  
+  .erp-btn-gold {
+    @apply erp-btn bg-gradient-to-r from-gold-500 to-gold-600 text-white hover:from-gold-600 hover:to-gold-700 focus:ring-gold-500 shadow-sm hover:shadow-md;
+  }
+  
+  /* ERP Forms */
+  .erp-input {
+    @apply w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 bg-white;
+  }
+  
+  .erp-select {
+    @apply w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 bg-white cursor-pointer;
+  }
+  
+  .erp-textarea {
+    @apply w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 bg-white resize-none;
+  }
+  
+  .erp-label {
+    @apply block text-sm font-medium text-neutral-700 mb-1;
+  }
+  
+  .erp-form-group {
+    @apply mb-4;
+  }
+  
+  /* ERP Sidebar */
+  .erp-sidebar {
+    @apply fixed left-0 top-0 h-full w-64 bg-white shadow-erp-lg transform transition-all duration-500 ease-in-out z-40 border-r border-neutral-200;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .erp-sidebar-closed {
+    @apply -translate-x-full opacity-0 pointer-events-none;
+  }
+  
+  .erp-sidebar-open {
+    @apply translate-x-0 opacity-100;
+  }
+  
+  .erp-sidebar-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden;
+  }
+  
+  .erp-nav-link {
+    @apply flex items-center px-4 py-3 text-neutral-700 hover:bg-primary-50 hover:text-primary-700 transition-all duration-300 ease-in-out rounded-lg mx-2;
+    transform: translateX(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .erp-nav-link:hover {
+    @apply transform translate-x-1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .erp-nav-link-active {
+    @apply bg-primary-100 text-primary-800 border-r-2 border-primary-600 font-medium;
+  }
+  
+  /* ERP Main Content */
+  .erp-main-content {
+    @apply transition-all duration-500 ease-in-out;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0f4c75 50%, #1e3a5f 75%, #0a2647 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .erp-main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(0deg, transparent 0%, rgba(79, 209, 197, 0.03) 20%, transparent 40%),
+      linear-gradient(90deg, transparent 0%, rgba(94, 234, 212, 0.02) 30%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
+    opacity: 0.6;
+    pointer-events: none;
+    animation: subtleGlow 8s ease-in-out infinite;
+  }
+  
+  .erp-main-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      /* Abstract chart lines - subtle glowing paths */
+      linear-gradient(90deg, transparent 0%, transparent 5%, rgba(79, 209, 197, 0.15) 10%, transparent 15%, transparent 20%, rgba(94, 234, 212, 0.12) 25%, transparent 30%),
+      linear-gradient(180deg, transparent 0%, transparent 10%, rgba(79, 209, 197, 0.1) 20%, transparent 30%, transparent 40%, rgba(94, 234, 212, 0.08) 50%, transparent 60%),
+      /* Diagonal abstract lines */
+      linear-gradient(45deg, transparent 0%, rgba(79, 209, 197, 0.08) 5%, transparent 10%, transparent 15%, rgba(94, 234, 212, 0.06) 20%, transparent 25%),
+      /* Wave-like chart pattern */
+      radial-gradient(ellipse 800px 200px at 50% 30%, rgba(79, 209, 197, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 600px 150px at 80% 70%, rgba(94, 234, 212, 0.06) 0%, transparent 50%);
+    background-size: 
+      200% 100%,
+      100% 200%,
+      150% 150%,
+      100% 100%,
+      100% 100%;
+    background-position: 
+      0% 50%,
+      50% 0%,
+      0% 0%,
+      50% 50%,
+      50% 50%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    animation: chartLinesMove 25s ease-in-out infinite;
+    filter: blur(1px);
+  }
+  
+  .erp-main-content-sidebar-open {
+    @apply lg:ml-64;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 100% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 0% 100%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.002);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes subtleGlow {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes chartLinesMove {
+    0% {
+      background-position: 
+        0% 50%,
+        50% 0%,
+        0% 0%,
+        50% 50%,
+        50% 50%;
+      opacity: 0.6;
+    }
+    33% {
+      background-position: 
+        100% 40%,
+        60% 100%,
+        50% 30%,
+        40% 60%,
+        60% 40%;
+      opacity: 0.8;
+    }
+    66% {
+      background-position: 
+        50% 60%,
+        30% 50%,
+        100% 70%,
+        70% 30%,
+        30% 70%;
+      opacity: 0.5;
+    }
+    100% {
+      background-position: 
+        0% 50%,
+        50% 0%,
+        0% 0%,
+        50% 50%,
+        50% 50%;
+      opacity: 0.6;
+    }
+  }
+  
+  @keyframes backgroundPatternMove {
+    0% {
+      background-position: 0% 0%, 0% 50%;
+    }
+    50% {
+      background-position: 100% 100%, 100% 50%;
+    }
+    100% {
+      background-position: 0% 0%, 0% 50%;
+    }
+  }
+  
+  /* ERP Tables */
+  .erp-table {
+    @apply w-full bg-white rounded-lg shadow-erp border border-neutral-200 overflow-hidden;
+  }
+  
+  .erp-table th {
+    @apply bg-neutral-50 px-6 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider border-b border-neutral-200;
+  }
+  
+  .erp-table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-neutral-900 border-b border-neutral-100;
+  }
+  
+  .erp-table tbody tr:hover {
+    @apply bg-primary-50;
+  }
+  
+  /* ERP Status Badges */
+  .erp-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .erp-badge-success {
+    @apply erp-badge bg-success-100 text-success-800;
+  }
+  
+  .erp-badge-warning {
+    @apply erp-badge bg-warning-100 text-warning-800;
+  }
+  
+  .erp-badge-danger {
+    @apply erp-badge bg-danger-100 text-danger-800;
+  }
+  
+  .erp-badge-primary {
+    @apply erp-badge bg-primary-100 text-primary-800;
+  }
+  
+  /* ERP Alerts */
+  .erp-alert {
+    @apply p-4 rounded-lg border-l-4 mb-4;
+  }
+  
+  .erp-alert-success {
+    @apply erp-alert bg-success-50 border-success-400 text-success-800;
+  }
+  
+  .erp-alert-warning {
+    @apply erp-alert bg-warning-50 border-warning-400 text-warning-800;
+  }
+  
+  .erp-alert-danger {
+    @apply erp-alert bg-danger-50 border-danger-400 text-danger-800;
+  }
+  
+  .erp-alert-info {
+    @apply erp-alert bg-primary-50 border-primary-400 text-primary-800;
+  }
+  
+  /* ERP Modals */
+  .erp-modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50;
+  }
+  
+  .erp-modal-content {
+    @apply bg-white rounded-xl shadow-erp-xl max-w-md w-full max-h-[90vh] overflow-y-auto;
+  }
+  
+  .erp-modal-header {
+    @apply px-6 py-4 border-b border-neutral-200 flex items-center justify-between;
+  }
+  
+  .erp-modal-body {
+    @apply px-6 py-4;
+  }
+  
+  .erp-modal-footer {
+    @apply px-6 py-4 border-t border-neutral-200 flex justify-end space-x-3;
+  }
+  
+  /* ERP Charts */
+  .erp-chart-container {
+    @apply bg-white rounded-lg shadow-erp border border-neutral-200 p-6;
+  }
+  
+  /* ERP Loading States */
+  .erp-loading-spinner {
+    @apply animate-spin rounded-full h-4 w-4 border-2 border-neutral-300 border-t-primary-600;
+  }
+  
+  .erp-loading-overlay {
+    @apply absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10;
+  }
+  
+  /* ERP Header */
+  .erp-header {
+    @apply bg-white shadow-erp border-b border-neutral-200 px-4 py-3;
+  }
+  
+  .erp-header-content {
+    @apply flex items-center justify-between;
+  }
+  
+  /* ERP Logo */
+  .erp-logo {
+    @apply flex items-center space-x-2;
+  }
+  
+  .erp-logo-icon {
+    @apply w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg flex items-center justify-center;
+  }
+  
+  .erp-logo-text {
+    @apply text-xl font-bold text-neutral-900;
+  }
+  
+  /* ERP Stats Cards */
+  .erp-stats-card {
+    @apply erp-card p-6;
+  }
+  
+  .erp-stats-value {
+    @apply text-2xl font-bold text-neutral-900;
+  }
+  
+  .erp-stats-label {
+    @apply text-sm font-medium text-neutral-600;
+  }
+  
+  .erp-stats-change {
+    @apply text-sm font-medium;
+  }
+  
+  .erp-stats-change-positive {
+    @apply erp-stats-change text-success-600;
+  }
+  
+  .erp-stats-change-negative {
+    @apply erp-stats-change text-danger-600;
+  }
+  
+  /* ERP Filters */
+  .erp-filters {
+    @apply erp-card p-4 mb-6;
+  }
+  
+  .erp-filter-group {
+    @apply flex items-center space-x-4;
+  }
+  
+  /* ERP Actions */
+  .erp-actions {
+    @apply flex items-center space-x-2;
+  }
+  
+  .erp-action-btn {
+    @apply p-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors duration-200;
+  }
+  
+  .erp-action-btn-danger {
+    @apply p-2 text-danger-600 hover:text-danger-700 hover:bg-danger-50 rounded-lg transition-colors duration-200;
+  }
+  
+  .erp-action-btn-primary {
+    @apply p-2 text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors duration-200;
+  }
+  
+  /* Responsive Utilities */
+  .erp-mobile-only {
+    @apply block lg:hidden;
+  }
+  
+  .erp-desktop-only {
+    @apply hidden lg:block;
+  }
+  
+  /* ERP Grid */
+  .erp-grid {
+    @apply grid gap-6;
+  }
+  
+  .erp-grid-1 {
+    @apply grid-cols-1;
+  }
+  
+  .erp-grid-2 {
+    @apply grid-cols-1 lg:grid-cols-2;
+  }
+  
+  .erp-grid-3 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .erp-grid-4 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
+  }
+  
+  /* Finance Background - Reusable for all pages */
+  .finance-background {
+    @apply min-h-screen relative overflow-hidden;
+    background: 
+      /* Money pattern overlay */
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='money' x='0' y='0' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='50' cy='50' r='2' fill='%234fd1c1' opacity='0.1'/%3E%3Ccircle cx='25' cy='25' r='1.5' fill='%235eead4' opacity='0.08'/%3E%3Ccircle cx='75' cy='75' r='1.5' fill='%235eead4' opacity='0.08'/%3E%3Cpath d='M30 50 L70 50 M50 30 L50 70' stroke='%234fd1c1' stroke-width='0.5' opacity='0.06'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23money)'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0f4c75 50%, #1e3a5f 75%, #0a2647 100%);
+    background-size: 200px 200px, 400% 400%;
+    animation: gradientShift 20s ease infinite, backgroundPatternMove 30s linear infinite;
+    transition: background-position 0.5s ease, opacity 0.3s ease;
+  }
+  
+  .finance-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(0deg, transparent 0%, rgba(79, 209, 197, 0.03) 20%, transparent 40%),
+      linear-gradient(90deg, transparent 0%, rgba(94, 234, 212, 0.02) 30%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
+    opacity: 0.6;
+    pointer-events: none;
+    animation: subtleGlow 8s ease-in-out infinite;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .finance-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      /* Abstract chart lines - subtle glowing paths */
+      linear-gradient(90deg, transparent 0%, transparent 5%, rgba(79, 209, 197, 0.15) 10%, transparent 15%, transparent 20%, rgba(94, 234, 212, 0.12) 25%, transparent 30%),
+      linear-gradient(180deg, transparent 0%, transparent 10%, rgba(79, 209, 197, 0.1) 20%, transparent 30%, transparent 40%, rgba(94, 234, 212, 0.08) 50%, transparent 60%),
+      /* Diagonal abstract lines */
+      linear-gradient(45deg, transparent 0%, rgba(79, 209, 197, 0.08) 5%, transparent 10%, transparent 15%, rgba(94, 234, 212, 0.06) 20%, transparent 25%),
+      /* Wave-like chart pattern */
+      radial-gradient(ellipse 800px 200px at 50% 30%, rgba(79, 209, 197, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 600px 150px at 80% 70%, rgba(94, 234, 212, 0.06) 0%, transparent 50%);
+    background-size: 
+      200% 100%,
+      100% 200%,
+      150% 150%,
+      100% 100%,
+      100% 100%;
+    background-position: 
+      0% 50%,
+      50% 0%,
+      0% 0%,
+      50% 50%,
+      50% 50%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    animation: chartLinesMove 25s ease-in-out infinite;
+    filter: blur(1px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+}
+
+@layer utilities {
+  .erp-text-primary {
+    @apply text-primary-600;
+  }
+  
+  .erp-bg-primary {
+    @apply bg-primary-600;
+  }
+  
+  .erp-border-primary {
+    @apply border-primary-600;
+  }
+  
+  .erp-shadow-primary {
+    @apply shadow-lg shadow-primary-500/25;
+  }
+}
