@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 // Build SMTP transport options based on env and a secure preference
 const buildTransportOptions = (preferSecure) => {
@@ -71,16 +72,24 @@ const createTransporter = async () => {
   throw lastError || new Error('Failed to create SMTP transporter');
 };
 
+// Send via Resend (API) if RESEND_API_KEY is available
+const trySendViaResend = async ({ to, subject, html }) => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return false;
+  const resend = new Resend(apiKey);
+  const fromAddress = process.env.RESEND_FROM || process.env.EMAIL_FROM || process.env.SMTP_USER || process.env.EMAIL_USER;
+  if (!fromAddress) {
+    throw new Error('RESEND_API_KEY is set but no sender address found. Set RESEND_FROM or EMAIL_FROM.');
+  }
+  await resend.emails.send({ from: fromAddress, to, subject, html });
+  return true;
+};
+
 // Send password reset email
 export const sendPasswordResetEmail = async (email, resetToken, resetUrl) => {
   try {
-    const transporter = await createTransporter();
-
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: 'Password Reset Request - ExpenseScope',
-      html: `
+    const subject = 'Password Reset Request - ExpenseScope';
+    const html = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
           <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <h2 style="color: #333; text-align: center; margin-bottom: 20px;">Password Reset Request</h2>
@@ -110,10 +119,19 @@ export const sendPasswordResetEmail = async (email, resetToken, resetUrl) => {
             © ${new Date().getFullYear()} ExpenseScope. All rights reserved.
           </p>
         </div>
-      `,
-    };
+      `;
 
-    await transporter.sendMail(mailOptions);
+    // 1) Try API-based provider first (avoids SMTP egress blocks)
+    const sentViaResend = await trySendViaResend({ to: email, subject, html });
+    if (sentViaResend) {
+      console.log(`Password reset email sent to ${email} via Resend`);
+      return true;
+    }
+
+    // 2) Fallback to SMTP transporter
+    const transporter = await createTransporter();
+    const fromAddress = process.env.EMAIL_FROM || process.env.SMTP_USER || process.env.EMAIL_USER;
+    await transporter.sendMail({ from: fromAddress, to: email, subject, html });
     console.log(`Password reset email sent to ${email}`);
     return true;
   } catch (error) {
